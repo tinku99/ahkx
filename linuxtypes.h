@@ -1,6 +1,6 @@
 #ifndef linuxtypes_h
 #define linuxtypes_h
-
+#include <sys/types.h>
 #include <string.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -8,6 +8,7 @@
 extern "C" {
 #define UINT_PTR unsigned int
 #define LONG_PTR long
+
 #define ULONG_PTR unsigned long
 #define DWORD_PTR unsigned long
 #define _strtoi64 strtoll
@@ -72,13 +73,18 @@ typedef UINT DWORD;
 typedef void * HANDLE;
 typedef void * LPVOID;
 typedef void * PVOID;
+typedef void * LRESULT;
 typedef bool BOOL;
 typedef DWORD *LPCOLORREF;
 typedef TCHAR *LPTSTR;
 typedef const TCHAR *LPCTSTR;
 
+typedef UINT WPARAM;
+typedef UINT LPARAM;
+typedef short SHORT;
+typedef unsigned short USHORT;
 
-
+typedef HANDLE HKL ;
 typedef HANDLE HWND ;
 typedef HANDLE LPCWSTR;
 typedef HANDLE HKEY;
