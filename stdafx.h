@@ -23,7 +23,7 @@ GNU General Public License for more details.
 // are changed infrequently
 //
 
-#pragma once
+#pragma once  
 
 // #define WIN32_LEAN_AND_MEAN		 // Exclude rarely-used stuff from Windows headers
 

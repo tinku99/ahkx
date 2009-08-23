@@ -21,6 +21,7 @@ GNU General Public License for more details.
 
 #include "linuxtypes.h"
 #include "stdafx.h" // pre-compiled headers
+#include "linuxtypes2.h"
 
 
 #define NAME_P "AutoHotkeyGCC"
