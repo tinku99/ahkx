@@ -1,3 +1,18 @@
+/*
+AutoHotkey GCC
+Copyright 2009 Naveen Garg(naveen.garg@gmail.com)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+*/
+
 #ifndef linuxtypes2_h
 #define linuxtypes2_h
 // const_cast<char*> for returning a modifiable string instead of const char
@@ -53,7 +68,14 @@ typedef struct {
     UINT flags;
 } NMTVKEYDOWN, *LPNMTVKEYDOWN;
 
-
+typedef struct {
+    HWND hwnd;
+    UINT message;
+    WPARAM wParam;
+    LPARAM lParam;
+    DWORD time;
+    POINT pt;
+} MSG, *PMSG;
 
 
 #endif  //  #ifndef linuxtypes2_h

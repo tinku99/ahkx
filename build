@@ -8,4 +8,5 @@ g++ -o util.o util.h
 g++ -o clipboard.o clipboard.h
 g++ -o SimpleHeap.o SimpleHeap.h
 g++ -o var.o var.h
-g++ -o k.o keyboard_mouse.h
+g++ -o keyboard_mouse.o keyboard_mouse.h
+g++ -o application.o application.h

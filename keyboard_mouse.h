@@ -32,6 +32,7 @@ GNU General Public License for more details.
 // will be eventually):
 // ALREADY DEFINED: #define VK_HELP 0x2F
 // In case a compiler with a non-updated header file is used:
+// todo: replace all these with definitions from x11/keysym.h
 #ifndef VK_BROWSER_BACK
 	#define VK_BROWSER_BACK        0xA6
 	#define VK_BROWSER_FORWARD     0xA7
