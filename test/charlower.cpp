@@ -16,5 +16,6 @@ int main(){
     //     *aStr = (char)ltolower(aStr);
        aStr[0] = (char)ltolower(*aStr);
     printf("%s", aStr); 
+    printf("%d", true);
     return 0;
 }

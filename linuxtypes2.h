@@ -1,6 +1,6 @@
 #ifndef linuxtypes2_h
 #define linuxtypes2_h
-
+// const_cast<char*> for returning a modifiable string instead of const char
 #include "stdafx.h"
 #include "defines.h"
 #include <ctype.h>
@@ -26,6 +26,17 @@ extern "C" {
 #define MIM_BACKGROUND 2
 #define MIM_APPLYTOSUBMENUS 0x80000000L
 
+  // from mingw winnt.h
+#define MINCHAR	0x80
+#define MAXCHAR	0x7f
+#define MINSHORT	0x8000
+#define MAXSHORT	0x7fff
+#define MINLONG	0x80000000
+#define MAXLONG	0x7fffffff
+#define MAXBYTE	0xff
+#define MAXWORD	0xffff
+#define MAXDWORD	0xffffffff
+#define TRUE true
 
 } // extern c close
 

@@ -19,10 +19,8 @@ GNU General Public License for more details.
 #ifndef defines_h
 #define defines_h
 
-#include "linuxtypes.h"
-#include "stdafx.h" // pre-compiled headers
-#include "linuxtypes2.h"
 
+#include "stdafx.h" // pre-compiled headers
 
 #define NAME_P "AutoHotkeyGCC"
 #ifndef NAME_L_REVISION

@@ -61,7 +61,7 @@ public:
 	ResultType Commit(UINT aFormat = CF_TEXT);
 	ResultType AbortWrite(char *aErrorMessage = "");
 	ResultType Close(char *aErrorMessage = NULL);
-	const char *Contents()
+	char *Contents()
 	{
 		if (mClipMemNewLocked)
 			// Its set up for being written to, which takes precedence over the fact
@@ -73,11 +73,11 @@ public:
 			// just do this for now, to remind the caller that in these cases, it should
 			// call Get(buf), providing the target buf so that we have some memory to
 			// transcribe the (potentially huge) list of files into:
-		  return IsClipboardFormatAvailable(CF_HDROP) ? "<<>>" : "";
-		// const_cast<char*>  # may have to resort to this, first trying to return const
+		  return const_cast<char*> (IsClipboardFormatAvailable(CF_HDROP) ? "<<>>" : "");
+		// # may have to resort to this, first trying to return const
 		else
 		  // Some callers may rely upon receiving empty string rather than NULL on failure:
-		  return (Get() == CLIPBOARD_FAILURE) ? "" : mClipMemNowLocked;  
+		  return const_cast<char*> ((Get() == CLIPBOARD_FAILURE) ? "" : mClipMemNowLocked);  
 		// const_cast<char*>  # may have to resort to this, first trying to return const
 	}
 

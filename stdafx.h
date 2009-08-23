@@ -25,12 +25,6 @@ GNU General Public License for more details.
 
 #pragma once  
 
-// #define WIN32_LEAN_AND_MEAN		 // Exclude rarely-used stuff from Windows headers
-
-// #define _WIN32_WINNT 0x0501
-// #define _WIN32_IE 0x0501  // Added for v1.0.35 to have MCS_NOTODAY resolve as expected, and possibly solve other problems on newer systems.
-
-// #ifdef _MSC_VER
 	// C RunTime Header Files
         #include <ctype.h>
 	#include <stdio.h>
@@ -38,6 +32,10 @@ GNU General Public License for more details.
 	#include <stdarg.h> // used by snprintfcat()
 	#include <limits.h> // for UINT_MAX, UCHAR_MAX, etc.
 	#include <malloc.h> // For _alloca()
+
+#include "linuxtypes.h"
+#include "linuxtypes2.h"
+
         
 //        #include "mingw/winbase.h"
 	//#include <memory.h>
