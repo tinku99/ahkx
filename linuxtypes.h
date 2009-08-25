@@ -23,11 +23,14 @@ GNU General Public License for more details.
 extern "C" {
 #define UINT_PTR unsigned int
 #define LONG_PTR long
-
+#define TRUE true
+#define FALSE false
 #define ULONG_PTR unsigned long
 #define DWORD_PTR unsigned long
 #define _strtoi64 strtoll
 #define _strtoui64 strtoull 
+#define _stricmp strcasecmp
+#define _strnicmp strncasecmp
 #define IsCharAlpha isalpha
 #define MAKEPOINTS(l) (*((POINTS*)&(l)))
 #define MAKEROP4(f,b)	(DWORD)((((b)<<8)&0xFF000000)|(f))
@@ -112,6 +115,14 @@ typedef HANDLE HDC;
 typedef HANDLE HBITMAP;
 typedef HANDLE HMODULE;
 typedef HANDLE HICON;
+
+typedef HANDLE HMENU;
+typedef HANDLE HFONT;
+typedef HANDLE HIMAGELIST;
+typedef HANDLE HDROP;
+typedef HANDLE HMENU;
+
+
 
 typedef struct {
   DWORD dwLowDateTime;

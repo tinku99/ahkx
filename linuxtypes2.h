@@ -51,7 +51,7 @@ extern "C" {
 #define MAXBYTE	0xff
 #define MAXWORD	0xffff
 #define MAXDWORD	0xffffffff
-#define TRUE true
+
 
 } // extern c close
 
