@@ -77,5 +77,23 @@ typedef struct {
     POINT pt;
 } MSG, *PMSG;
 
+int  GetThreadPriority(HANDLE);
+DWORD  GetTickCount(VOID);
+DWORD  GetVersion(void);
+typedef struct 
+{
+    LONG    left;
+    LONG    top;
+    LONG    right;
+    LONG    bottom;
+} RECT;
+
+typedef struct {
+  DWORD	cbSize;
+  RECT	rcMonitor;
+  RECT	rcWork;
+  DWORD	dwFlags;
+  CHAR	szDevice[200];  // made up 200
+} MONITORINFOEX;
 
 #endif  //  #ifndef linuxtypes2_h

@@ -4,9 +4,17 @@ g++ -o linuxtypes.o linuxtypes.h
 g++ -o linuxtypes2.o linuxtypes2.h
 g++ -o stdafx.o stdafx.h
 g++ -o defines.o defines.h
+g++ -o os_version.o os_version.h
 g++ -o util.o util.h
 g++ -o clipboard.o clipboard.h
 g++ -o SimpleHeap.o SimpleHeap.h
 g++ -o var.o var.h
 g++ -o keyboard_mouse.o keyboard_mouse.h
 g++ -o application.o application.h
+g++ -o script.o script.h
+g++ -o Debugger.o Debugger.h
+g++ -o WinGroup.o WinGroup.h
+g++ -o globaldata.o globaldata.h
+g++ -o hook.o hook.h
+g++ -o hotkey.o hotkey.h
+g++ -o window.o window.h

@@ -21,6 +21,15 @@ GNU General Public License for more details.
 #include <stdlib.h>
 // #define _itoa itoa 
 extern "C" {
+#ifdef WIN32 
+  // for mingw or cygwin
+#else
+typedef int64_t __int64 ;
+#define MAX_PATH 260
+#endif
+#define CALLBACK    __stdcall
+#define WINAPI      __stdcall
+typedef wchar_t WCHAR ;
 #define UINT_PTR unsigned int
 #define LONG_PTR long
 #define TRUE true
@@ -48,7 +57,7 @@ extern "C" {
 #define LF_FACESIZE	32
 #define LF_FULLFACESIZE	64
 
-#define MAX_PATH 260
+
 #define CF_TEXT	1
 #define CF_BITMAP	2
 #define CF_METAFILEPICT	3
@@ -83,14 +92,16 @@ typedef char BYTE;
 typedef unsigned short      WORD;
 typedef char     TCHAR; 
 typedef time_t SYSTEMTIME;
-typedef int64_t __int64 ;
+
+typedef short SHORT;
 typedef long LONG;
+typedef char CHAR;
 typedef unsigned char UCHAR ;
 typedef unsigned int UINT; 
-typedef UINT DWORD;
+typedef unsigned long       DWORD;
 typedef void VOID;
 
-typedef void * HANDLE;
+
 typedef void * LPVOID;
 typedef void * PVOID;
 typedef void * LRESULT;
@@ -100,11 +111,17 @@ typedef TCHAR *LPTSTR;
 typedef const TCHAR *LPCTSTR;
 
 typedef UINT WPARAM;
-typedef UINT LPARAM;
-typedef short SHORT;
-typedef unsigned short USHORT;
+typedef LONG_PTR            LPARAM;
 
+typedef unsigned short USHORT;
+typedef void * HANDLE;
+typedef HANDLE HINSTANCE;
+typedef HANDLE HACCEL;
+typedef HANDLE LPPICTURE;
+typedef HANDLE LPRECT;
 typedef HANDLE HKL ;
+typedef HANDLE HMONITOR ;
+typedef HANDLE HWAVEOUT ;
 typedef HANDLE HWND ;
 typedef HANDLE LPCWSTR;
 typedef HANDLE HKEY;
@@ -112,6 +129,7 @@ typedef HANDLE HGLOBAL;
 typedef HANDLE HBRUSH; 
 typedef HANDLE HRESULT;
 typedef HANDLE HDC;
+typedef HANDLE HHOOK;
 typedef HANDLE HBITMAP;
 typedef HANDLE HMODULE;
 typedef HANDLE HICON;
@@ -121,8 +139,6 @@ typedef HANDLE HFONT;
 typedef HANDLE HIMAGELIST;
 typedef HANDLE HDROP;
 typedef HANDLE HMENU;
-
-
 
 typedef struct {
   DWORD dwLowDateTime;
@@ -171,8 +187,32 @@ typedef struct {
   TCHAR   elfScript[LF_FACESIZE];
 }ENUMLOGFONTEX;
 
+typedef struct {
+	HANDLE hProcess;
+	HANDLE hThread;
+	DWORD dwProcessId;
+	DWORD dwThreadId;
+} PROCESS_INFORMATION;
 
+typedef struct {
+	unsigned long  Data1;
+	unsigned short Data2;
+	unsigned short Data3;
+	unsigned char  Data4[8];
+} GUID;
 
+typedef LRESULT(CALLBACK *WNDPROC)(HWND,UINT,WPARAM,LPARAM);
+typedef BOOL(CALLBACK *DRAWSTATEPROC)(HDC,LPARAM,WPARAM,int,int);
+typedef BOOL(CALLBACK *WNDENUMPROC)(HWND,LPARAM);
+typedef BOOL(CALLBACK *ENUMWINDOWSPROC)(HWND,LPARAM);
+typedef struct {
+  //	PCRITICAL_SECTION_DEBUG DebugInfo;  // todo: replace this
+	LONG LockCount;
+	LONG RecursionCount;
+	HANDLE OwningThread;
+	HANDLE LockSemaphore;
+	DWORD SpinCount;
+} CRITICAL_SECTION;
 
 
 #endif // #ifndef linuxtypes_h

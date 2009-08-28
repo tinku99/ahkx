@@ -41,8 +41,8 @@ GNU General Public License for more details.
 
 // Includes
 // #include <windows.h>
-typedef unsigned int DWORD;
 typedef char     TCHAR; 
+typedef unsigned long       DWORD;
 typedef struct  {
   DWORD dwOSVersionInfoSize;
   DWORD dwMajorVersion;

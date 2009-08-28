@@ -34,6 +34,24 @@ GNU General Public License for more details.
 EXTERN_OSVER; // For the access to the g_os version object without having to include globaldata.h
 EXTERN_G;
 // from winuser: sw...
+int GetDlgCtrlID( HWND hwndCtl ){   // todo: implement
+  return 0;
+}
+HWND GetParent( HWND hwndCtl ){   // todo: implement
+  return 0;
+}
+typedef struct {
+    DWORD cbSize;
+    HWND hWnd;
+    UINT uID;
+    UINT uFlags;
+    UINT uCallbackMessage;
+    HICON hIcon;
+    GUID guidItem;
+}NOTIFYICONDATA;
+#define VK_MBUTTON	4
+#define CLR_DEFAULT 0xff000000
+#define REG_NONE 0
 #define SW_HIDE 0
 #define SW_NORMAL 1
 #define SW_SHOWNORMAL 1
@@ -77,6 +95,30 @@ EXTERN_G;
 #define WS_TILEDWINDOW	0xcf0000
 #define WS_VISIBLE	0x10000000
 #define WS_VSCROLL	0x200000
+#define WM_USER 1024
+#define WM_USERCHANGED 84
+#define WM_VKEYTOITEM 46
+#define WM_VSCROLL 277
+#define WM_VSCROLLCLIPBOARD 778
+#define WM_WINDOWPOSCHANGED 71
+#define WM_WINDOWPOSCHANGING 70
+#define WM_WININICHANGE 26
+#define WM_KEYFIRST 256
+#define WM_KEYLAST 264
+#define WM_SYNCPAINT  136
+#define WM_MOUSEACTIVATE 33
+#define WM_MOUSEMOVE 512
+#define WM_LBUTTONDOWN 513
+#define WM_LBUTTONUP 514
+#define WM_LBUTTONDBLCLK 515
+#define WM_RBUTTONDOWN 516
+#define WM_RBUTTONUP 517
+#define WM_RBUTTONDBLCLK 518
+#define WM_MBUTTONDOWN 519
+#define WM_MBUTTONUP 520
+#define WM_MBUTTONDBLCLK 521
+#define WM_MOUSEWHEEL 522
+#define WM_MOUSEFIRST 512
 
 
 
@@ -161,6 +203,7 @@ enum VariableTypeType {VAR_TYPE_INVALID, VAR_TYPE_NUMBER, VAR_TYPE_INTEGER, VAR_
 // 1003 to 65299: User Defined Menu IDs
 // 65300 to 65399: Standard tray menu items.
 // 65400 to 65534: main menu items (might be best to leave 65535 unused in case it ever has special meaning)
+#define IDCANCEL 2
 enum CommandIDs {CONTROL_ID_FIRST = IDCANCEL + 1
 	, ID_USER_FIRST = MAX_CONTROLS_PER_GUI + 3 // The first ID available for user defined menu items. Do not change this (see above for why).
 	, ID_USER_LAST = 65299  // The last. Especially do not change this due to scripts using Post/SendMessage to automate AutoHotkey.
@@ -401,7 +444,7 @@ struct RegItemStruct
 	DWORD type; // Value Type (e.g REG_DWORD).
 	FILETIME ftLastWriteTime; // Non-initialized.
 	void InitForValues() {ftLastWriteTime.dwHighDateTime = ftLastWriteTime.dwLowDateTime = 0;}
-	void InitForSubkeys() {type = REG_SUBKEY;}  // To distinguish REG_DWORD and such from the subkeys themselves.
+  void InitForSubkeys() {type = (unsigned int) REG_SUBKEY;}  // To distinguish REG_DWORD and such from the subkeys themselves.
 	RegItemStruct(HKEY aRootKeyType, HKEY aRootKey, char *aSubKey)
 		: root_key_type(aRootKeyType), root_key(aRootKey), type(REG_NONE)
 	{
@@ -1210,9 +1253,7 @@ public:
 		case REG_QWORD: strlcpy(aBuf, "REG_QWORD", aBufSize); return aBuf;
 		case REG_SUBKEY: strlcpy(aBuf, "KEY", aBufSize); return aBuf;  // Custom (non-standard) type.
 		  */
-		if (aBufSize) *aBuf = '\0'; return aBuf;  // Make it be the empty string for REG_NONE and anything else.
-		else 
-		  return aBuf;
+	    return aBuf;
 	}
 
 	static DWORD SoundConvertComponentType(char *aBuf, int *aInstanceNumber = NULL)
@@ -1248,7 +1289,7 @@ public:
 		// SB Audigy's recording (dest #2) Wave/Mp3 volume:
 		if (!strlicmp(aBuf, "N/A", length_to_check))           return MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED; // 0x1000
 		*/
-		return MIXERLINE_COMPONENTTYPE_DST_UNDEFINED; // Zero.
+		return 0;
 	}
 	static DWORD SoundConvertControlType(char *aBuf)
 	{
@@ -2314,7 +2355,7 @@ public:
 
 	GuiType(int aWindowIndex) // Constructor
 		: mHwnd(NULL), mStatusBarHwnd(NULL), mWindowIndex(aWindowIndex), mControlCount(0), mControlCapacity(0)
-		, mDefaultButtonIndex(-1), mLabelForClose(NULL), mLabelForEscape(NULL), mLabelForSize(NULL)
+	  , mDefaultButtonIndex((unsigned int)-1), mLabelForClose(NULL), mLabelForEscape(NULL), mLabelForSize(NULL)
 		, mLabelForDropFiles(NULL), mLabelForContextMenu(NULL)
 		, mLabelForCloseIsRunning(false), mLabelForEscapeIsRunning(false), mLabelForSizeIsRunning(false)
 		, mLabelsHaveBeenSet(false)
@@ -2361,8 +2402,9 @@ public:
 	void GetNonClientArea(LONG &aWidth, LONG &aHeight);
 	void GetTotalWidthAndHeight(LONG &aWidth, LONG &aHeight);
 
-	ResultType ControlParseOptions(char *aOptions, GuiControlOptionsType &aOpt, GuiControlType &aControl
-		, GuiIndexType aControlIndex = -1); // aControlIndex is not needed upon control creation.
+	ResultType ControlParseOptions(char *aOptions, GuiControlOptionsType &aOpt, GuiControlType &aControl  , GuiIndexType aControlIndex = (unsigned int)-1); 
+	// aControlIndex is not needed upon control creation.
+	// todo: aControlIndex used to be -1... 
 	void ControlInitOptions(GuiControlOptionsType &aOpt, GuiControlType &aControl);
 	void ControlAddContents(GuiControlType &aControl, char *aContent, int aChoice, GuiControlOptionsType *aOpt = NULL);
 	ResultType Show(char *aOptions, char *aTitle);
