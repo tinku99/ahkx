@@ -45,8 +45,8 @@ GNU General Public License for more details.
 
 // The following avoid having to link to OLDNAMES.lib, but they probably don't
 // reduce code size at all.
-#define stricmp(str1, str2) _stricmp(str1, str2)
-#define strnicmp(str1, str2, size) _strnicmp(str1, str2, size)
+// #define stricmp(str1, str2) _stricmp(str1, str2)
+// #define strnicmp(str1, str2, size) _strnicmp(str1, str2, size)
 
 // todo: x11 version of SPI_GETFOREGROUNDLOCKTIMEOUT
 #ifndef SPI_GETFOREGROUNDLOCKTIMEOUT

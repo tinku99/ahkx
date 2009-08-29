@@ -545,7 +545,8 @@ __int64 FileTimeSecondsUntil(FILETIME *pftStart, FILETIME *pftEnd);
 
 SymbolType IsPureNumeric(char *aBuf, BOOL aAllowNegative = false // BOOL vs. bool might squeeze a little more performance out of this frequently-called function.
 	, BOOL aAllowAllWhitespace = true, BOOL aAllowFloat = false, BOOL aAllowImpure = false);
-#if !defined(__APPLE__)
+
+#ifdef __MINGW32__  // #if !defined(__APPLE__)
 void strlcpy(char *aDst, const char *aSrc, size_t aDstSize);
 #endif
 
