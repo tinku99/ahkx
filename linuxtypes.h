@@ -19,14 +19,19 @@ GNU General Public License for more details.
 #include <string.h>
 #include <stdint.h>
 #include <stdlib.h>
+#undef NULL  // win2gcc
+#define NULL 0
 // #define _itoa itoa 
 extern "C" {
 #ifdef WIN32 
   // for mingw or cygwin
 #else
+
 typedef int64_t __int64 ;
 #define MAX_PATH 260
 #endif
+  // for mingw or cygwin
+
 #define CALLBACK    __stdcall
 #define WINAPI      __stdcall
 typedef wchar_t WCHAR ;
@@ -214,5 +219,10 @@ typedef struct {
 	DWORD SpinCount;
 } CRITICAL_SECTION;
 
+#define lstrcat  strcat
+#define lstrcpyn strncpy
+#define lstrcmpi strcasecmp
+#define wsprintf sprintf
+#define wvsprintf vsprintf
 
 #endif // #ifndef linuxtypes_h

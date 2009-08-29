@@ -366,6 +366,7 @@ ResultType InputBox(Var *aOutputVar, char *aTitle, char *aText, bool aHideInput
 BOOL InputBoxProc(HWND hWndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
 VOID InputBoxTimeout(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime);
 VOID DerefTimeout(HWND hWnd, UINT uMsg, UINT idEvent, DWORD dwTime);
+// ahkgcc todo: dereftimeout from settimer / setalarm
 BOOL EnumChildFindSeqNum(HWND aWnd, LPARAM lParam);
 BOOL EnumChildFindPoint(HWND aWnd, LPARAM lParam);
 BOOL EnumChildGetControlList(HWND aWnd, LPARAM lParam);

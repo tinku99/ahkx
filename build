@@ -18,3 +18,4 @@ g++ -o globaldata.o globaldata.h
 g++ -o hook.o hook.h
 g++ -o hotkey.o hotkey.h
 g++ -o window.o window.h
+g++ -c globaldata.cpp globaldata.h

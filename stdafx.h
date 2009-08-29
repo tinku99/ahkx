@@ -37,6 +37,7 @@ GNU General Public License for more details.
 #include "linuxtypes.h"
 #include "linuxtypes2.h"
 
+#define _alloca alloca
         
 //        #include "mingw/winbase.h"
 	//#include <memory.h>

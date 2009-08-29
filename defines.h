@@ -53,11 +53,9 @@ GNU General Public License for more details.
 	#define SPI_GETFOREGROUNDLOCKTIMEOUT        0x2000
 	#define SPI_SETFOREGROUNDLOCKTIMEOUT        0x2001
 #endif
-
+#include "winkeys.h"
 // todo: x11 versions of virtual keys
 #ifndef VK_XBUTTON1
-	#define VK_XBUTTON1       0x05    /* NOT contiguous with L & RBUTTON */
-	#define VK_XBUTTON2       0x06    /* NOT contiguous with L & RBUTTON */
 	#define WM_NCXBUTTONDOWN                0x00AB
 	#define WM_NCXBUTTONUP                  0x00AC
 	#define WM_NCXBUTTONDBLCLK              0x00AD
