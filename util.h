@@ -545,8 +545,10 @@ __int64 FileTimeSecondsUntil(FILETIME *pftStart, FILETIME *pftEnd);
 
 SymbolType IsPureNumeric(char *aBuf, BOOL aAllowNegative = false // BOOL vs. bool might squeeze a little more performance out of this frequently-called function.
 	, BOOL aAllowAllWhitespace = true, BOOL aAllowFloat = false, BOOL aAllowImpure = false);
-
+#if !defined(__APPLE__)
 void strlcpy(char *aDst, const char *aSrc, size_t aDstSize);
+#endif
+
 int snprintf(char *aBuf, int aBufSize, const char *aFormat, ...);
 int snprintfcat(char *aBuf, int aBufSize, const char *aFormat, ...);
 // Not currently used by anything, so commented out to possibly reduce code size:
