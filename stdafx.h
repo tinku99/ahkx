@@ -31,8 +31,9 @@ GNU General Public License for more details.
 	#include <stdlib.h>
 	#include <stdarg.h> // used by snprintfcat()
 	#include <limits.h> // for UINT_MAX, UCHAR_MAX, etc.
-	#include <malloc.h> // For _alloca()
-
+#if !defined(__APPLE__)
+#include <malloc.h>
+#endif
 #include "linuxtypes.h"
 #include "linuxtypes2.h"
 
