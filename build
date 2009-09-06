@@ -1,0 +1,6 @@
+#!/bin/sh
+winegcc -o ahkx.exe ahkx.c -ldl -lX11
+echo ./ahkx scriptname
+echo or
+echo ./run
+echo to run

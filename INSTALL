@@ -1,0 +1,9 @@
+to use winemaker
+winemaker .
+add any files to be compiled to src list
+add libraries to library list
+
+
+
+easier to just use winegcc
+makes a run script as well
