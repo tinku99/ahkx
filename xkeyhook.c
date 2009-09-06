@@ -2,9 +2,10 @@
 
 /*  taken from code in xkey.c by 
  *  Dominic Giampaolo (nick@cs.maxine.wpi.edu)
- *
+ *  http://stllinux.org/meeting_notes/1997/0619/xkey.html
  *  unknown license, although Dominic has released other things underl GPL
- *
+ *  such as libsx: http://freshmeat.net/projects/libsx/
+ *  will likely replace this wih a device based keyboard hook soon anyway.
  */
 
 char *TranslateKeyCode(XEvent *ev);
@@ -31,15 +32,6 @@ void snoop_all_windows(Window root, unsigned long type)
   if (nchildren == 0)
     return;
 
-  /* For a more drastic inidication of the problem being exploited
-   * here, you can change these calls to XSelectInput() to something
-   * like XClearWindow(d, children[i]) or if you want to be real
-   * nasty, do XKillWindow(d, children[i]).  Of course if you do that,
-   * then you'll want to remove the loop in main().
-   *
-   * The whole point of this exercise being that I shouldn't be
-   * allowed to manipulate resources which do not belong to me.
-   */
   XSelectInput(d, root, type);
 
   for(i=0; i < nchildren; i++)
