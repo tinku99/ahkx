@@ -22,6 +22,8 @@ GNU General Public License for more details.
 
 int (*ahkdll)(char *, char *, char *) ;
 unsigned int (*ahkLabel)(char *) ;
+unsigned int (*ahkKey)(char *) ;
+unsigned int (*ahkCollect)(char *) ;
 
 int main(int argc, char **argv)
 {
@@ -35,6 +37,9 @@ int main(int argc, char **argv)
 
     ahkdll = WineGetProcAddress( dll_handle, "ahkdll" );
     ahkLabel = WineGetProcAddress( dll_handle, "ahkLabel" );
+    ahkKey = WineGetProcAddress( dll_handle, "ahkKey" );
+    ahkCollect = WineGetProcAddress( dll_handle, "ahkCollect" );
+
     ahkdll(script, "", "");
     sleep(2);
     //    ahkLabel("k");
@@ -73,8 +78,18 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
      string = TranslateKeyCode(&xev);
      if (string == NULL)
        continue;
-
-     if (*string == '\r')
+     else if (*string == 'a')
+       {
+	 printf("eventa%d\n", ahkKey("a"));
+       }
+     else if (*string == 'b')
+       {
+	 printf("events%d\n", ahkKey("s"));
+	 printf("eventd%d\n", ahkKey("d"));
+	 printf("eventd%d\n", ahkKey(" "));
+	 printf("eventd%d\n", ahkKey(" "));
+       }
+     else if (*string == '\r')
        printf("\n");
      else if (strlen(string) == 1)
        {

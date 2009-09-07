@@ -13,6 +13,45 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-dependencies: X11, dl
+dependencies: wine, X11, dl
 ./build
 ./run scriptname
+
+wine dependencies: 
+sudo apt-get install flex, bison, libfreetype6-dev, libfreetype6, X11, openssl
+sudo apt-get install python2.6-openssl, libjpeg62-dev, , libpng3-dev
+
+
+sudo apt-get install libxcursor-dev
+sudo apt-get install libXxf86vm-dev
+sudo apt-get install libxrandr-dev
+sudo apt-get install libxinerama-dev
+
+
+sudo apt-get install libhal-dev
+sudo apt-get install libgnutls-dev
+
+sudo apt-get install libsane-dev
+sudo apt-get install libgphoto2-dev
+sudo apt-get install liblcms-dev
+sudo apt-get install libcapi20-dev
+
+sudo apt-get install fontconfig-dev
+sudo apt-get install libldap-dev
+
+
+configure: lib(n)curses development files not found, curses won't be supported.
+configure: libcups development files not found, CUPS won't be supported.
+configure: fontconfig development files not found, fontconfig won't be supported.
+configure: libgsm development files not found, gsm 06.10 codec won't be supported.
+configure: libmpg123 development files not found (or too old), mp3 codec won't be supported.
+
+configure: WARNING: OpenSSL development files not found, SSL won't be supported.
+
+configure: WARNING: libpng development files not found, PNG won't be supported.
+libcups2-dev
+sudo apt-get install libgsm1-dev
+sudo apt-get install libfontconfig1-dev
+sudo apt-get install libmpg123-dev
+sudo apt-get install libcurl4-openssl-dev
+sudo apt-get install libpng3-dev

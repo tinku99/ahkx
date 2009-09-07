@@ -15,19 +15,32 @@ GNU General Public License for more details.
 */
 
 #persistent
+#usehook
 msgbox welcome to ahkwine
+SetTimer, doit, 1000
 return
 
 
-s::
-msgbox s
+::sd::
+msgbox sdkf
 return
 
+a::
+msgbox a
+return
 
-k:
+b:
+msgbox b
+return
+
+k::
 msgbox k
 return
 
 
 q::
 ExitApp
+
+doit:
+Traytip, do, %A_PriorHotkey%, ,16
+return
