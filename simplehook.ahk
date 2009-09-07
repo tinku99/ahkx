@@ -17,11 +17,13 @@ GNU General Public License for more details.
 #persistent
 #usehook
 msgbox welcome to ahkwine
+inputbox, x, ahkx playground
 return
 
 
 ::sd::
 msgbox sdkf
+send, hi from x
 return
 
 a::
