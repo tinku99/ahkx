@@ -17,7 +17,6 @@ GNU General Public License for more details.
 #persistent
 #usehook
 msgbox welcome to ahkwine
-SetTimer, doit, 1000
 return
 
 
@@ -41,6 +40,3 @@ return
 q::
 ExitApp
 
-doit:
-Traytip, do, %A_PriorHotkey%, ,16
-return

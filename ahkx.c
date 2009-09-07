@@ -78,11 +78,12 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
      string = TranslateKeyCode(&xev);
      if (string == NULL)
        continue;
+     /*     else if (*string == 'b')
      else if (*string == 'a')
        {
 	 printf("eventa%d\n", ahkKey("a"));
        }
-     else if (*string == 'b')
+
        {
 	 printf("events%d\n", ahkKey("s"));
 	 printf("eventd%d\n", ahkKey("d"));
@@ -91,11 +92,13 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
        }
      else if (*string == '\r')
        printf("\n");
+     */
      else if (strlen(string) == 1)
        {
        printf("%s", string);
        buf[0] = *string;
-       ahkLabel(buf);
+       ahkKey(buf);
+       //       ahkLabel(buf);
        }
      else
        printf("<<%s>>", string);
