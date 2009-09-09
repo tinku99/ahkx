@@ -36,6 +36,7 @@ return
 
 k::
 msgbox k
+inputbox, x, ahkx playground
 return
 
 

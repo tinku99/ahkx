@@ -1,0 +1,9 @@
+EXPORTS
+    addFile @1
+    ahkFindFunc @2
+    ahkFunction @3
+    ahkKey @4
+    ahkLabel @5
+    ahkassign @6
+    ahkdll @7
+    ahkgetvar @8

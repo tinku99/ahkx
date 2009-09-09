@@ -1,2 +1,2 @@
 #!/bin/sh
-sh ahkx $1
+sh ahkx.exe $1

@@ -28,8 +28,8 @@ unsigned int (*ahkCollect)(char *) ;
 int main(int argc, char **argv)
 {
   //  extern ahkLabel, ahkdll;
-  void * dll_handle = WineLoadLibrary("AutoHotkey.dll" );
-  //  void * dll_handle = WineLoadLibrary("ahkx.dll" );
+  //  void * dll_handle = WineLoadLibrary("AutoHotkey.dll" );
+  void * dll_handle = WineLoadLibrary("ahkx.dll" );
   char *script; 
   if (argv[1] == NULL)
     script = "simplehook.ahk";
