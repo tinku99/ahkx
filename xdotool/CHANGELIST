@@ -1,0 +1,155 @@
+20090815:
+  * Incorporate patch from Henning Bekel which adds a new ability to change
+    window properties such as window name, icon name, class, role, etc.
+    New command: xdotool set_window
+  * Add --maxdepth to 'xdotool search' to limit the traversal depth
+
+20090710:
+  * You can clear keyboard modifiers during typing now with --clearmodifiers
+    When used, this flag causes physical keyboard modifiers (alt, control, etc)
+    that are currently active to be ignored during typing.
+    This is supported in: xdotool key, keyup, keydown, and type.
+    
+    Example: 
+      xdotool type 'hello world' results in 'HELLO WORLD' while holding shift.
+      xdotool type --clearmodifiers 'hello world' results in 'hello world'
+        regardless of you holding shift.
+
+    The 'reset' only happens at the beginning of typing and the modifiers are
+    restored at the end. If you press a modifier key *during* typing it will 
+    act as if --clearmodifiers was not present.
+    (http://code.google.com/p/semicomplete/issues/detail?id=6)
+
+  * You can now specify literal keycodes for any key command.
+    Example: xdotool key 38   (types 'a' with my keyboard)
+    (requested via mailing list)
+
+  * Regression fix: 'xdotool type' now properly obeys capitalization, again.
+  * Bug fix: 'xdotool key --window' now works properly
+
+20090612:
+  * Fixed bug where shift modifier was not reset when 'xdotool type' used.
+    http://code.google.com/p/semicomplete/issues/detail?id=5
+
+20090609:
+  * Add '--delay <delay_in_ms>' to xdotool type. Sets the delay between keys.
+  * Add '--window <windowid>' to xdotool type, key, keyup, and keydown.
+    This feature (key events with --window <windowid>) only works if the
+    application does not reject X events that have 'send_event' set to true.
+
+    Special notes:
+    * Firefox appears to ignore all input when it does not have focus.
+    * xterm ignores sendevent by default, ctrl+leftclick menu will let you
+      enable it.
+    * gnome-terminal appears to accept send_event input by default
+
+
+20090330:
+  * Fix bug where we use the wrong type in sizeof() for allocating character
+    code map.
+  * Fix tiny problem where we would try to free() an invalid pointer
+
+20090126:
+  * Change the default behavior of 'getwindowfocus' to get the first
+    ancestor-or-self window that has WM_CLASS set. WM_CLASS will be set on
+    (all?) top-level windows and it's possible that the currently focused window
+    according to X is not a top-level window. To use the previous behavior, use
+    'getwindowfocus -f'
+  * Make 'xdotool key at' work correctly. 'at' is usually Shift+2, for example.
+    Now all shifted characters should work, but I've only tested on a US
+    keyboard.
+  * Minor Makefile fixes for package maintainers.
+
+20080720:
+  * Add 'getmouselocation' which ouputs the coordinate of the mouse cursor and
+    the screen number the mouse is on.
+  * Add 'getactivewindow' which uses NETWM to query the active window; this is
+    often more reliable than 'getwindowfocus' assuming your window manager
+    supports it
+  * Fix typos in the documentationn.
+
+20080716:
+  * Fix return codes in xdo_keysequence() and other functions
+
+20080606:
+  * Correctly report an error if xdotool is invoked with an invalid command.
+  * Fix invalid error code reporting from 'windowraise'
+
+20080603:
+  * Daniel Kahn Gillmor reported a problem with return codes from xdotool. All
+    commands return proper exit status now (0 == success, nonzero == error)
+  * I tested on 3 window managers: Gnome2 2.20.0, OpenBox 3.4, ion-3rc-20070608
+    - Gnome and OpenBox pass all tests.
+    - ion-3 fails on any desktop-related methods (ion-3 lacks the support).
+
+20080601:
+  * Add new commands:
+    - windowactivate: Activate a window. If the window is on another desktop, we
+        will switch to that desktop and then activate the window.
+    - set_num_desktops number: Changes the number of desktops or workspaces.
+    - get_num_desktops: Output the current number of desktops.
+    - set_desktop desktop_number: Change the current view to the specified
+        desktop.
+    - get_desktop: Output the current desktop in view.
+    - set_desktop_for_window window_id desktop_number: Move a window to a
+        different desktop.
+    - get_desktop_for_window window_id: Output the desktop currently containing
+        the given window.
+
+    windowactivate tested and confirmed working in: ion-3 and Gnome2 (metacity)
+    The rest of the new commands have only been tested in Gnome2. They do not
+    work in ion-3 due to lacking support for EWMH in ion.
+  * Rewrote the man page in perlpod format.
+
+20080521:
+  * Import patches from keynav's xdotool branch (From Lukas Mai) which make
+    xdotool compile happily when building with -Wall and -pedantic (and others)
+  * Finally convert to using Window type for (hopefully) everything instead of
+    incorrectly typecasting Window to int sometimes.
+  * Confirmed that the one (but mostly useless) test passes.
+
+20071230:
+  * Manpage contribution by Daniel Kahn Gillmor
+  * Add COPYRIGHT from svn to the distributed package.
+
+20070903:
+  * Add xdo_mousemove_relative for relative mouse movements
+  * Add xdolib.sh. This is a script library to help with features xdo does not
+    explicitly implement, such as querying window attributes, or fetching the
+    root window id. An example which uses this is: examples/move_window_away.sh
+
+20070812:
+  * Magnus Boman contributed keysequence_{up,down} adding new commands to
+    xdotool: keyup and keydown. These take the same arguments as 'key' but only
+    send keyup or keydown events.
+  * Lee Pumphret contributed getwindowfocus, which tells you the window id of
+    the window currently holding focus.
+  * Removed 'Makefile.no-pkg-config' because the original Makefile now knows
+    how to build for both cases: with and without pkg-config.
+
+20070722:
+  * Compiles without warnings when using gcc -Wall now
+  * Fixed false error reporting due to some functions missing return statements
+
+20070713:
+  * Add flag SIZE_USEHINTS to xdo_window_setsize
+  * Add flag --usehints to xdotool windowsize
+
+  Increments are used often in terminals that say "my font is 5 by 7 pixels, so
+  resize by that increment". So, you can use this to set a terminal to be 80x24
+  characters instead of pixels. Verified by resizing xterm and gnome-terminal
+  (with menus enabled).
+
+20070712:
+  Added new search options to 'xdotool search'
+    --onlyvisible shows only visible windows in the results
+    --title causes only the window title to be matched
+    --name causes the window name to be matched
+    --class causes the window class to be matched
+
+  For information on names and classes, check out the xprop tool.
+    For example, for an xterm you will see this in the xprop output:
+    WM_CLASS(STRING) = "xterm", "XTerm"
+  "xterm" is the name, "XTerm" is the class. Don't ask me what the differences
+  are supposed to be. ;)
+

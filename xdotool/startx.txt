@@ -1,0 +1,162 @@
+use: X [:<display>] [option]
+-a #                   mouse acceleration (pixels)
+-ac                    disable access control restrictions
+-audit int             set audit trail level
+-auth file             select authorization file
+-br                    create root window with black background
++bs                    enable any backing store support
+-bs                    disable any backing store support
+-c                     turns off key-click
+c #                    key-click volume (0-100)
+-cc int                default color visual class
+-core                  generate core dump on fatal error
+-dpi int               screen resolution in dots per inch
+dpms                   enables VESA DPMS monitor control
+-dpms                  disables VESA DPMS monitor control
+-deferglyphs [none|all|16] defer loading of [no|all|16-bit] glyphs
+-f #                   bell base (0-100)
+-fc string             cursor font
+-fn string             default font name
+-fp string             default font path
+-help                  prints message with these options
+-I                     ignore all remaining arguments
+-ld int                limit data space to N Kb
+-lf int                limit number of open files to N
+-ls int                limit stack space to N Kb
+-nolock                disable the locking mechanism
+-logo                  enable logo in screen saver
+nologo                 disable logo in screen saver
+-nolisten string       don't listen on protocol
+-noreset               don't reset after last client exists
+-reset                 reset after last client exists
+-p #                   screen-saver pattern duration (minutes)
+-pn                    accept failure to listen on all ports
+-nopn                  reject failure to listen on all ports
+-r                     turns off auto-repeat
+r                      turns on auto-repeat 
+-render [default|mono|gray|color] set render color alloc policy
+-s #                   screen-saver timeout (minutes)
+-su                    disable any save under support
+-t #                   mouse threshold (pixels)
+-terminate             terminate at server reset
+-to #                  connection time out
+-tst                   disable testing extensions
+ttyxx                  server started from init on /dev/ttyxx
+v                      video blanking for screen-saver
+-v                     screen-saver without video blanking
+-wm                    WhenMapped default backing-store
+-wr                    create root window with white background
+-x string              loads named extension at init time 
+-maxbigreqsize         set maximal bigrequest size 
++xinerama              Enable XINERAMA extension
+-xinerama              Disable XINERAMA extension
+-dumbSched             Disable smart scheduling, enable old behavior
+-schedInterval int     Set scheduler interval in msec
++extension name        Enable extension
+-extension name        Disable extension
+-query host-name       contact named host for XDMCP
+-broadcast             broadcast for XDMCP
+-indirect host-name    contact named host for indirect XDMCP
+-port port-num         UDP port number to send messages to
+-from local-address    specify the local address to connect from
+-once                  Terminate server after one session
+-class display-class   specify display class to send in manage
+-cookie xdm-auth-bits  specify the magic cookie for XDMCP
+-displayID display-id  manufacturer display ID for request
+-kb                    disable the X Keyboard Extension
++kb                    enable the X Keyboard Extension
+[+-]accessx [ timeout [ timeout_mask [ feedback [ options_mask] ] ] ]
+                       enable/disable accessx key sequences
+-ardelay               set XKB autorepeat delay
+-arinterval            set XKB autorepeat interval
+-depth bits_per_pixel
+	Specify an optional bitdepth to use in fullscreen mode
+	with a DirectDraw engine.
+-emulate3buttons [timeout]
+	Emulate 3 button mouse with an optional timeout in
+	milliseconds.
+-engine engine_type_id
+	Override the server's automatically selected engine type:
+		1 - Shadow GDI
+		2 - Shadow DirectDraw
+		4 - Shadow DirectDraw4 Non-Locking
+-fullscreen
+	Run the server in fullscreen mode.
+-refresh rate_in_Hz
+	Specify an optional refresh rate to use in fullscreen mode
+	with a DirectDraw engine.
+-screen scr_num [width height [x y] | [[WxH[+X+Y]][@m]] ]
+	Enable screen scr_num and optionally specify a width and
+	height and initial position for that screen. Additionally
+	a monitor number can be specified to start the server on,
+	at which point, all coordinates become relative to that
+	monitor (Not for Windows NT4 and 95). Examples:
+	 -screen 0 800x600+100+100@2 ; 2nd monitor offset 100,100 size 800x600
+	 -screen 0 1024x768@3        ; 3rd monitor size 1024x768
+	 -screen 0 @1 ; on 1st monitor using its full resolution (the default)
+-lesspointer
+	Hide the windows mouse pointer when it is over an inactive
+	Cygwin/X window.  This prevents ghost cursors appearing where
+	the Windows cursor is drawn overtop of the X cursor
+-nodecoration
+	Do not draw a window border, title bar, etc.  Windowed
+	mode only.
+-mwextwm
+	Run the server in multi-window external window manager mode.
+-internalwm
+	Run the internal window manager.
+-rootless
+	Run the server in rootless mode.
+-multiwindow
+	Run the server in multi-window mode.
+-multiplemonitors
+	EXPERIMENTAL: Use the entire virtual screen if multiple
+	monitors are present.
+-clipboard
+	Run the clipboard integration module.
+	Do not use at the same time as 'xwinclip'.
+-nounicodeclipboard
+	Do not use Unicode clipboard even if NT-based platform.
+-scrollbars
+	In windowed mode, allow screens bigger than the Windows desktop.
+	Moreover, if the window has decorations, one can now resize
+	it.
+-[no]trayicon
+	Do not create a tray icon.  Default is to create one
+	icon per screen.  You can globally disable tray icons with
+	-notrayicon, then enable it for specific screens with
+	-trayicon for those screens.
+-clipupdates num_boxes
+	Use a clipping region to constrain shadow update blits to
+	the updated region when num_boxes, or more, are in the
+	updated region.  Currently supported only by `-engine 1'.
+-[no]unixkill
+	Ctrl+Alt+Backspace exits the X Server.
+-[no]winkill
+	Alt+F4 exits the X Server.
+-xkbrules XKBRules
+	Equivalent to XKBRules in XF86Config files.
+-xkbmodel XKBModel
+	Equivalent to XKBModel in XF86Config files.
+-xkblayout XKBLayout
+	Equivalent to XKBLayout in XF86Config files.
+	For example: -xkblayout de
+-xkbvariant XKBVariant
+	Equivalent to XKBVariant in XF86Config files.
+	For example: -xkbvariant nodeadkeys
+-xkboptions XKBOptions
+	Equivalent to XKBOptions in XF86Config files.
+-logfile filename
+	Write logmessages to <filename>.
+-logverbose verbosity
+	Set the verbosity of logmessages. [NOTE: Only a few messages
+	respect the settings yet]
+		0 - only print fatal error.
+		1 - print additional configuration information.
+		2 - print additional runtime information [default].
+		3 - print debugging and tracing information.
+-[no]keyhook
+	Grab special windows key combinations like Alt-Tab or the Menu key.
+ These keys are discarded by default.
+-swcursor
+	Disable the usage of the windows cursor and use the X11 software cursor instead
