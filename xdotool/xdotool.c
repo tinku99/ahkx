@@ -18,8 +18,8 @@
 #include <string.h>
 #include <strings.h>
 
-
 #include "xdo.h"
+#include "xdotool.h"
 
 int cmd_click(int argc, char **args);
 int cmd_getwindowfocus(int argc, char **args);
@@ -49,9 +49,6 @@ int cmd_set_desktop(int argc, char **args);
 int cmd_get_desktop(int argc, char **args);
 int cmd_set_desktop_for_window(int argc, char **args);
 int cmd_get_desktop_for_window(int argc, char **args);
-
-xdo_t *xdo;
-void window_print(Window wid);
 
 struct dispatch {
   const char *name;

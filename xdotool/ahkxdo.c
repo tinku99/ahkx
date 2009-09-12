@@ -24,10 +24,20 @@ GNU General Public License for more details.
 #include "xdo.h"
 #include "ahkxdo.h"
 
-void mousemove(int x, int y)
-{
-  xdo_t *xdo; 
+static xdo_t *xdo; 
+int mousemove(int x, int y, int relative);
+
+
+
+void init(){
   xdo = xdo_new(getenv("DISPLAY"));
-  xdo_mousemove(xdo, x, y);
-  return ;
+}
+
+int mousemove(int x, int y, int relative)
+{
+  if (relative)
+    return xdo_mousemove_relative(xdo, x, y);
+  else
+    return xdo_mousemove(xdo, x, y);
+
 }
