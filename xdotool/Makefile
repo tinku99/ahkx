@@ -1,3 +1,7 @@
+CC = winegcc
+CXX = wineg++
+RC = wrc
+
 PREFIX?=/usr/local
 INSTALLBIN?=$(PREFIX)/bin
 INSTALLMAN?=$(PREFIX)/man
@@ -8,7 +12,7 @@ WARNFLAGS+=-pedantic -Wall -W -Wundef \
            -Wmissing-prototypes -Wnested-externs -Winline \
            -Wdisabled-optimization -Wno-missing-field-initializers
 
-CFLAGS?=-pipe -std=c99 $(WARNFLAGS)
+CFLAGS?=-pipe -shared -std=c99 $(WARNFLAGS)
 
 DEFAULT_LIBS=-L/usr/X11R6/lib -L/usr/local/lib -lX11 -lXtst
 DEFAULT_INC=-I/usr/X11R6/include -I/usr/local/include
@@ -42,14 +46,18 @@ clean:
 xdo.o: xdo.c
 	$(CC) $(CFLAGS) -c xdo.c
 
-xdotool.o: xdotool.c
-	$(CC) $(CFLAGS) -c xdotool.c
+xdotool.o: xdotool.c 
+	$(CC) $(CFLAGS) -c xdotool.c 
+
+ahkxdo.o: ahkxdo.c 
+	$(CC) $(CFLAGS) -c ahkxdo.c 
 
 xdo.c: xdo.h
 xdotool.c: xdo.h
+ahkxdo.c: ahkxdo.h xdo.h
 
-xdotool: xdotool.o xdo.o
-	$(CC) $(CFLAGS) $(LDFLAGS) xdotool.o xdo.o -o $@
+xdotool: xdotool.o xdo.o ahkxdo.o xdotool.spec
+	$(CC) $(CFLAGS) $(LDFLAGS) xdotool.o xdo.o ahkxdo.o xdotool.spec -o $@
 
 xdotool.1: xdotool.pod
 	pod2man -c "" -r "" xdotool.pod > $@
