@@ -869,11 +869,3 @@ int cmd_get_desktop_for_window(int argc, char **args) {
   printf("%ld\n", desktop);
   return ret;
 }
-
-void mousemove(int x, int y)
-{
-  xdo_t *xdo; 
-  xdo = xdo_new(getenv("DISPLAY"));
-  xdo_mousemove(xdo, x, y);
-  return ;
-}
