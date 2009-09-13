@@ -47,9 +47,11 @@ int mouseclick(int x, int y, int button, int updown);
 int mouseclick(int x, int y, int button, int updown)
 {
   mousemove(x, y, 0);
-  //  if (updown == 0)
+  if (updown == 0)
+    xdo_click(xdo, button);
+  else if (updown == 1)
     xdo_mousedown(xdo, button);
-    //  if (updown == 1)
+  else if (updown == 2)
     xdo_mouseup(xdo, button);
   return 0;
 }
@@ -59,5 +61,29 @@ int mousegetpos(int *x, int *y, int *screen_num);
 int mousegetpos(int *x, int *y, int *screen_num) // todo: fix screen_num
 {
   return xdo_mouselocation(xdo, x, y, screen_num);
+}
+
+
+
+unsigned int *wingetid(char *rgxname)
+{
+  Window *list;  // window = unsigned long
+  int nwindows;
+  int i;
+  int c;
+  int max_depth = -1;
+  int search_flags = 0;
+  search_flags |= SEARCH_VISIBLEONLY;
+  search_flags |= SEARCH_TITLE;
+  search_flags |= SEARCH_NAME;
+  search_flags |= SEARCH_CLASS;
+
+  xdo_window_list_by_regex(xdo, rgxname, search_flags, max_depth, &list, &nwindows);
+  for (i = 0; i < nwindows; i++)
+    window_print(list[i]);
+
+  /* Free list as it's malloc'd by xdo_window_list_by_regex */
+
+  return list;   // remember to free(list);
 }
 

@@ -51,3 +51,10 @@ DllCall(A_ScriptDir . "\xdotool.dll.so\xmouseclick"
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmouseclick"
 , "int", x, "int", y, "int", button, "int", 1, "cdecl") 
 return
+
+
+t:: 
+x := DllCall(A_ScriptDir . "\xdotool.dll.so\xwingetid"
+, "str", "xdo", "cdecl") 
+msgbox % numget(x+0, 0, "UInt")
+return
