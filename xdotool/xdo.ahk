@@ -55,6 +55,23 @@ return
 
 t:: 
 x := DllCall(A_ScriptDir . "\xdotool.dll.so\xwingetid"
-, "str", "xdo", "cdecl") 
-msgbox % numget(x+0, 0, "UInt")
+, "str", "xdo", "cdecl UInt") 
+msgbox % x
+return
+
+a:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xwinactivate"
+, "str", "xdo", "cdecl UInt") 
+return
+
+
+r:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xwinrestore"
+, "str", "xdo", "cdecl UInt") 
+return
+
+
+m:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xwinmove"
+, "str", "xdo", "int", 100, "int", 100, "cdecl UInt") 
 return

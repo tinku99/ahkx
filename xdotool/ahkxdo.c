@@ -24,9 +24,18 @@ GNU General Public License for more details.
 #include "xdo.h"
 #include "ahkxdo.h"
 
+
 static xdo_t *xdo; 
+extern void window_print(Window wid);
 void init(void);
+Window wingetid(char *rgxname);
 int mousemove(int x, int y, int relative);
+int mouseclick(int x, int y, int button, int updown);
+int mousegetpos(int *x, int *y, int *screen_num);
+unsigned int wingettitle(void);
+int winrestore(char *rgxname);
+int winactivate(char *rgxname);
+int winmove(char *rgxname, int x, int y);
 
 void init(void)
 {
@@ -42,7 +51,7 @@ int mousemove(int x, int y, int relative)
     return xdo_mousemove(xdo, x, y);
 
 }
-int mouseclick(int x, int y, int button, int updown);
+
 
 int mouseclick(int x, int y, int button, int updown)
 {
@@ -57,20 +66,58 @@ int mouseclick(int x, int y, int button, int updown)
 }
 
 
-int mousegetpos(int *x, int *y, int *screen_num);
+
 int mousegetpos(int *x, int *y, int *screen_num) // todo: fix screen_num
 {
   return xdo_mouselocation(xdo, x, y, screen_num);
 }
 
-
-
-unsigned int *wingetid(char *rgxname)
+unsigned int wingettitle(void)
 {
+  Window wid;
+  xdo_window_get_active(xdo, &wid);
+  return wid;
+}
+
+int winrestore(char *rgxname)
+{
+
+ Window wid = wingetid(rgxname);
+ xdo_window_raise(xdo, wid);
+ return 0;
+}
+
+int winactivate(char *rgxname)
+{
+
+ Window list = wingetid(rgxname);
+ xdo_window_activate(xdo, list);
+ return 0;
+}
+
+int winmove(char *rgxname, int x, int y)
+{
+
+ Window list = wingetid(rgxname);
+ xdo_window_move(xdo, list, x, y);
+ return 0;
+}
+
+
+
+Window wingetid(char *rgxname)
+{
+  Window wid;
   Window *list;  // window = unsigned long
+
+  if (!rgxname)
+    {
+  xdo_window_get_active(xdo, &wid);
+  return wid;
+    }
+
   int nwindows;
   int i;
-  int c;
   int max_depth = -1;
   int search_flags = 0;
   search_flags |= SEARCH_VISIBLEONLY;
@@ -82,8 +129,9 @@ unsigned int *wingetid(char *rgxname)
   for (i = 0; i < nwindows; i++)
     window_print(list[i]);
 
+  wid = list[0];
   /* Free list as it's malloc'd by xdo_window_list_by_regex */
-
-  return list;   // remember to free(list);
+  free(list);
+  return wid;   // remember to free(list);
 }
 
