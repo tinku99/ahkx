@@ -1,7 +1,6 @@
 *.dll
 *.so
 *.[oa]
-*.exe
 *.bak
 \.\#*
 *.bin

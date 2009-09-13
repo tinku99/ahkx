@@ -1,8 +1,8 @@
-*.exe
+AutoHotkey.exe
 *.lib
 *.[oa]
 *.so
 *.dll
 *~
 *.out
-xdotool
+
