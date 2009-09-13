@@ -15,3 +15,27 @@ msgbox % ErrorLevel
 return
 
 q::exitapp
+
+
+i:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", 0, "int", -20, "int", 1, "cdecl") 
+return
+
+
+k:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", 0, "int", 20, "int", 1, "cdecl") 
+return
+
+
+j:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", -20, "int", 0, "int", 1, "cdecl") 
+return
+
+
+l:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", 20, "int", 0, "int", 1, "cdecl") 
+return
