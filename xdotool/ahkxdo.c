@@ -47,18 +47,17 @@ int mouseclick(int x, int y, int button, int updown);
 int mouseclick(int x, int y, int button, int updown)
 {
   mousemove(x, y, 0);
-  if (updown == 0)
-    return xdo_mousedown(xdo, button);
-  if (updown == 1)
-    return xdo_mouseup(xdo, button);
-  return -1;
+  //  if (updown == 0)
+    xdo_mousedown(xdo, button);
+    //  if (updown == 1)
+    xdo_mouseup(xdo, button);
+  return 0;
 }
 
 
-int mousegetpos(int x, int y, int screen_num);
-int mousegetpos(int x, int y, int screen_num) // todo: fix me
+int mousegetpos(int *x, int *y, int *screen_num);
+int mousegetpos(int *x, int *y, int *screen_num) // todo: fix screen_num
 {
-  return xdo_mouselocation(xdo, &x, &y, &screen_num);
-
+  return xdo_mouselocation(xdo, x, y, screen_num);
 }
 
