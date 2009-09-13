@@ -25,12 +25,13 @@ GNU General Public License for more details.
 #include "ahkxdo.h"
 
 static xdo_t *xdo; 
-void init();
+void init(void);
 int mousemove(int x, int y, int relative);
 
-void init()
+void init(void)
 {
   xdo = xdo_new(getenv("DISPLAY"));
+  return ;
 }
 
 int mousemove(int x, int y, int relative)
@@ -50,7 +51,7 @@ int mouseclick(int x, int y, int button, int updown)
     return xdo_mousedown(xdo, button);
   if (updown == 1)
     return xdo_mouseup(xdo, button);
-
+  return -1;
 }
 
 
