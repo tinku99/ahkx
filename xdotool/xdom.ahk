@@ -7,7 +7,15 @@ return
 
 q::exitapp
 
+n::
+ifwinactive, naveen
+msgbox naveen active
+else
+msgbox naveen not active
+return
 
+
+return
 i:: 
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 0, "int", -20, "int", 1, "cdecl") 

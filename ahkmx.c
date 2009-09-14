@@ -24,12 +24,15 @@ int (*ahkdll)(char *, char *, char *) ;
 unsigned int (*ahkLabel)(char *) ;
 unsigned int (*ahkKey)(char *) ;
 unsigned int (*ahkCollect)(char *) ;
-
+unsigned int (*ximportfunc)(int (*)(char *)) ;
+int (* xifwinactive)(char *ahkx_str);
+void (* xinit)(void);
 int main(int argc, char **argv)
 {
   //  extern ahkLabel, ahkdll;
   //  void * dll_handle = WineLoadLibrary("AutoHotkey.dll" );
   void * dll_handle = WineLoadLibrary("ahkx.so" ); // ahkx.dll
+  void * xdo_handle = WineLoadLibrary("xdotool.dll.so" ); // ahkx.dll
   char *script; 
   if (argv[1] == NULL)
     script = "simplehook.ahk";
@@ -40,9 +43,16 @@ int main(int argc, char **argv)
     ahkLabel = WineGetProcAddress( dll_handle, "ahkLabel" );
     ahkKey = WineGetProcAddress( dll_handle, "ahkKey" );
     ahkCollect = WineGetProcAddress( dll_handle, "ahkCollect" );
-
+    ximportfunc = WineGetProcAddress( dll_handle, "ximportfunc" );
+    xifwinactive = WineGetProcAddress( xdo_handle, "xifwinactive" );
+    xinit = WineGetProcAddress( xdo_handle, "xinit" );
+    printf("%d%s", (int)ximportfunc, "ximportfunc");
+    printf("%d%s", (int)xifwinactive, "xifwinactive");
     ahkdll(script, "", "");
     sleep(2);
+    xinit();
+    int success = ximportfunc(xifwinactive);
+    printf("%d%s", success, "transferred");
     //    ahkLabel("k");
     char *key = "k";  // not used right now
     xkey(ahkLabel, key);

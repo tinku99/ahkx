@@ -1,0 +1,21 @@
+Source: ahkx
+Section: x11
+Priority: extra
+Maintainer: Naveen Garg <naveen.garg@gmail.com>
+Build-Depends: xdotool, debhelper (>= 7.0.50), pkg-config, libx11-dev, libxtst-dev, wine-dev
+Build-Depends-indep: python-central (>= 0.6.0)
+Standards-Version: 3.8.2
+Homepage: http://www.autohotkey.com/forum/topic46546.html
+Vcs-Git: git://github.com/tinku99/ahkx.git
+Vcs-Browser: http://github.com/tinku99/ahkx
+
+Package: ahkx
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+
+Description: End User Programming Language
+ AutoHotkey is a scripting language initially developed on windows.  
+ This is a linux port of AutoHotkey using libwine and AutoHotkey.dll
+ AutoHotkey facilitates scripting the keyboard, mouse, window manager.
+ It specializes in scripting the user interface generally.
+ 

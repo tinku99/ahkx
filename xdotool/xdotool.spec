@@ -7,5 +7,5 @@
 8  cdecl xwingettitle() wingettitle
 9  cdecl xwinrestore(str) winrestore
 10 cdecl xwinactivate(str) winactivate
-
+11 cdecl xifwinactive(str) ifwinactive
 

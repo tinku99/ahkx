@@ -28,15 +28,17 @@ GNU General Public License for more details.
 static xdo_t *xdo; 
 extern void window_print(Window wid);
 void init(void);
-Window wingetid(char *rgxname);
+
 int mousemove(int x, int y, int relative);
 int mouseclick(int x, int y, int button, int updown);
 int mousegetpos(int *x, int *y, int *screen_num);
+
+Window wingetid(char *rgxname);
 unsigned int wingettitle(void);
 int winrestore(char *rgxname);
 int winactivate(char *rgxname);
 int winmove(char *rgxname, int x, int y);
-
+int ifwinactive(char *rgxname); 
 void init(void)
 {
   xdo = xdo_new(getenv("DISPLAY"));
@@ -109,13 +111,6 @@ Window wingetid(char *rgxname)
 {
   Window wid;
   Window *list;  // window = unsigned long
-
-  if (!rgxname)
-    {
-  xdo_window_get_active(xdo, &wid);
-  return wid;
-    }
-
   int nwindows;
   int i;
   int max_depth = -1;
@@ -135,3 +130,12 @@ Window wingetid(char *rgxname)
   return wid;   // remember to free(list);
 }
 
+int ifwinactive(char *rgxname)
+{
+  Window cid = wingettitle(); 
+  Window wid = wingetid(rgxname);
+  if (cid == wid)
+    return 1;
+  else
+    return NULL; 
+}
