@@ -53,14 +53,14 @@ return
 
 
 y::
-suspend, on
-inputbox, title, title
-suspend, off
+ifwinactive xdo
+msgbox xdo is active
+else
+msgbox xdo is not active
 return
 
 t:: 
-if !title
-inputbox, title, title
+title = xdo
 WinGetTitle, ahktitle, % title
 xdoid := DllCall(A_ScriptDir . "\xdotool.dll.so\xwingetid"
 , "str", title, "cdecl UInt") 

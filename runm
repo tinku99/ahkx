@@ -1,2 +1,2 @@
 #!/bin/sh
-sh ahkmx.exe $1
+sh ahkmx.exe xdo.ahk

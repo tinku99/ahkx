@@ -1,1 +1,2 @@
-make -f Makefile
+make
+mv xdotool.dll.so ../xdotool.dll.so

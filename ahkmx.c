@@ -67,10 +67,6 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
   XEvent xev;
   int count = 0;
   hostname = ":0";
-  /* 
-    hostname = argv[1];
-  */
-
 
   d = XOpenDisplay(hostname);
   if (d == NULL)
@@ -89,30 +85,17 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
      string = TranslateKeyCode(&xev);
      if (string == NULL)
        continue;
-     /*     else if (*string == 'b')
-     else if (*string == 'a')
-       {
-	 printf("eventa%d\n", ahkKey("a"));
-       }
-
-       {
-	 printf("events%d\n", ahkKey("s"));
-	 printf("eventd%d\n", ahkKey("d"));
-	 printf("eventd%d\n", ahkKey(" "));
-	 printf("eventd%d\n", ahkKey(" "));
-       }
-     else if (*string == '\r')
-       printf("\n");
-     */
      else if (strlen(string) == 1)
        {
        printf("%s", string);
        buf[0] = *string;
-       ahkKey(buf);
-       //       ahkLabel(buf);
+       ahkKey(buf);        //       ahkLabel(buf);
        }
      else
-       printf("<<%s>>", string);
+       {       
+	 printf("<<%s>>", string);
+	 ahkKey(string);
+       }
      fflush(stdout);
    }
 }

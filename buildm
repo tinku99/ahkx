@@ -1,5 +1,9 @@
 #!/bin/sh
-winegcc -o ahkmx.exe ahkmx.c -ldl -lX11
+# winegcc -o ahkmx.exe ahkmx.c -ldl -lX11
+make
+cd xdotool
+sh build
+cd ..
 echo ./ahkx scriptname
 echo or
 echo ./run
