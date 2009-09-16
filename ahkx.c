@@ -77,6 +77,9 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
      XNextEvent(d, &xev);
 
      string = TranslateKeyCode(&xev);
+	 printf("<<%s>>", string);
+	 ahkKey(string);
+	 continue ; 
      if (string == NULL)
        continue;
      /*     else if (*string == 'b')
@@ -102,7 +105,10 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
        //       ahkLabel(buf);
        }
      else
-       printf("<<%s>>", string);
+       {       
+	 printf("<<%s>>", string);
+	 ahkKey(string);
+       }
      fflush(stdout);
    }
 }

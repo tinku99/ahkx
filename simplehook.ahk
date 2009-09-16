@@ -43,3 +43,18 @@ return
 q::
 ExitApp
 
+backspace::
+msgbox backspace
+return
+
+up::
+msgbox up
+return
+
+left::
+msgbox down
+return
+
+enter::
+msgbox enter
+return
