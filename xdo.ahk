@@ -8,29 +8,40 @@ return
 q::exitapp
 
 
+#ifwinexist naveen
 i:: 
+msgbox xdo
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 0, "int", -20, "int", 1, "cdecl") 
 return
 
 
 k:: 
+msgbox xdo
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 0, "int", 20, "int", 1, "cdecl") 
 return
 
 
+
+#ifwinexist
+
+#ifwinactive ^xdo
+
 j:: 
+msgbox xdo
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", -20, "int", 0, "int", 1, "cdecl") 
 return
 
 
 l:: 
+msgbox xdo
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 20, "int", 0, "int", 1, "cdecl") 
 return
 
+#ifwinactive 
 p::
 coordmode, mouse, screen
 mousegetpos, xa, ya

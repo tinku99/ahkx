@@ -109,7 +109,7 @@ int winmove(char *rgxname, int x, int y)
 
 Window wingetid(char *rgxname)
 {
-  Window wid;
+  Window wid = 0;
   Window *list;  // window = unsigned long
   int nwindows;
   int i;
@@ -121,13 +121,16 @@ Window wingetid(char *rgxname)
   search_flags |= SEARCH_CLASS;
 
   xdo_window_list_by_regex(xdo, rgxname, search_flags, max_depth, &list, &nwindows);
-  for (i = 0; i < nwindows; i++)
-    window_print(list[i]);
+  //  for (i = 0; i < nwindows; i++)
+  //    window_print(list[i]);
 
   wid = list[0];
   /* Free list as it's malloc'd by xdo_window_list_by_regex */
   free(list);
-  return wid;   // remember to free(list);
+  if (nwindows > 0)
+    return wid;   // remember to free(list);
+  else
+    return 0;
 }
 
 int ifwinactive(char *rgxname)
@@ -137,5 +140,5 @@ int ifwinactive(char *rgxname)
   if (cid == wid)
     return 1;
   else
-    return NULL; 
+    return 0; 
 }

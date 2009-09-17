@@ -1,6 +1,6 @@
 #!/bin/sh
 # winegcc -o ahkmx.exe ahkmx.c -ldl -lX11
-make
+make -f Makefile.m
 cd xdotool
 sh build
 cd ..
