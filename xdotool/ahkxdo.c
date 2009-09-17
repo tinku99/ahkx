@@ -38,7 +38,10 @@ unsigned int wingettitle(void);
 int winrestore(char *rgxname);
 int winactivate(char *rgxname);
 int winmove(char *rgxname, int x, int y);
+
 int ifwinactive(char *rgxname); 
+int send(char *message, char *rgxname);
+
 void init(void)
 {
   xdo = xdo_new(getenv("DISPLAY"));
@@ -109,10 +112,11 @@ int winmove(char *rgxname, int x, int y)
 
 Window wingetid(char *rgxname)
 {
+  printf("in wingetid with %s", rgxname);
   Window wid = 0;
   Window *list;  // window = unsigned long
   int nwindows;
-  int i;
+  //  int i;
   int max_depth = -1;
   int search_flags = 0;
   search_flags |= SEARCH_VISIBLEONLY;
@@ -142,3 +146,99 @@ int ifwinactive(char *rgxname)
   else
     return 0; 
 }
+
+
+
+
+
+int send(char *message, char *rgxname) {
+  printf("in xsend");
+  Window window = wingetid(rgxname);
+
+int ret = 0;
+  //  int i;
+  //  int c;
+  //  char *cmd ;
+  //  charcodemap_t *keymods;
+  // int nkeymods;
+
+  /* Options */
+  //  int clear_modifiers = 0;
+  //  Window window = 0;
+  useconds_t delay = 12000; /* 12ms between keystrokes default */
+
+
+  /*  if (clear_modifiers) {
+    xdo_active_modifiers_to_keycode_list(xdo, &keymods, &nkeymods);
+    xdo_keysequence_list_do(xdo, window, keymods, nkeymods, False, NULL);
+  }
+  */
+
+
+    ret = xdo_type(xdo, window, message, delay);
+    printf("typing %s", message);
+    if (ret) {
+      fprintf(stderr, "xdo_type reported an error\n");
+    }
+
+    /*
+      if (clear_modifiers) {
+      
+      xdo_keysequence_list_do(xdo, window, keymods, nkeymods, True, NULL);
+      free(keymods);
+      }
+    */
+    return ret;
+}
+
+
+
+  /*
+  struct option longopts[] = {
+    { "window", required_argument, NULL, 'w' },
+    { "delay", required_argument, NULL, 'd' },
+    { "clearmodifiers", no_argument, NULL, 'c' },
+    { 0, 0, 0, 0 },
+  };
+  */
+
+  //for (i = 0; i < argc; i++) { printf("'%s' ", args[i]); }; printf("\n");
+  /*  while (1) {
+    int option_index;
+    c = getopt_long(argc, args, "w:d:c", longopts, &option_index);
+
+    switch (c) {
+      case 'w':
+        window = strtoul(optarg, NULL, 0);
+        break;
+      case 'd':
+        --delay is in milliseconds, convert to microseconds 
+        delay = strtoul(optarg, NULL, 0) * 1000;
+        break;
+      case 'c':
+        clear_modifiers = 1;
+        break;
+    }
+
+    if (c == -1) {
+      break;
+    }
+  }
+  */
+
+  /*
+  args += optind;
+  argc -= optind;
+
+  if (argc == 0) {
+    fprintf(stderr, "You specified the wrong number of args.\n");
+    fprintf(stderr, 
+            "usage: %s [--window windowid] [--delay milliseconds] "
+            "<things to type>\n"
+            "--window <windowid>    - specify a window to send keys to\n"
+            "--delay <milliseconds> - delay between keystrokes\n"
+            "--clearmodifiers       - reset active modifiers (alt, etc) while typing\n"
+            , cmd);
+    return 1;
+  }
+  */

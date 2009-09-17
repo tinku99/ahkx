@@ -20,14 +20,17 @@ GNU General Public License for more details.
 #include "xheaders.h"
 #include "xkeyhook.c"
 typedef int (* ahkx_int_str)(char *ahkx_str); // ahkx N11
+typedef int (* ahkx_int_str_str)(char *ahkx_str, char *ahkx_str2); // ahkx N11
 
 int (*ahkdll)(char *, char *, char *) ;
 unsigned int (*ahkLabel)(char *) ;
 unsigned int (*ahkKey)(char *) ;
 unsigned int (*ahkCollect)(char *) ;
-unsigned int (*ximportfunc)(int (*)(char *), int (*)(char *)) ;
+unsigned int (*ximportfunc)(int (*)(char *), int (*)(char *)
+			    ,int (*)(char *, char *)) ;
 ahkx_int_str xifwinactive;  // int (* xifwinactive)(char *ahkx_str);
 ahkx_int_str xwingetid;
+ahkx_int_str_str xsend;
 void (* xinit)(void);
 int main(int argc, char **argv)
 {
@@ -48,14 +51,19 @@ int main(int argc, char **argv)
     ximportfunc = WineGetProcAddress( dll_handle, "ximportfunc" );
     xifwinactive = WineGetProcAddress( xdo_handle, "xifwinactive" );
     xwingetid = WineGetProcAddress( xdo_handle, "xwingetid" );
+    xsend = WineGetProcAddress( xdo_handle, "xsend" );
     xinit = WineGetProcAddress( xdo_handle, "xinit" );
     printf("%d%s", (int)ximportfunc, "ximportfunc");
     printf("%d%s", (int)xifwinactive, "xifwinactive");
     printf("%d%s", (int)xwingetid, "xwingetid");
+    printf("%d%s", (int)xsend, "xsend");
+    //    xwingetid("naveen");
+    //    xsend("from xsend", "naveen");
+
     ahkdll(script, "", "");
     sleep(2);
     xinit();
-    int success = ximportfunc(xifwinactive, xwingetid);
+    int success = ximportfunc(xifwinactive, xwingetid, xsend);
     printf("%d%s", success, "transferred");
     //    ahkLabel("k");
     char *key = "k";  // not used right now

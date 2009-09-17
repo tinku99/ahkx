@@ -8,4 +8,4 @@
 9  cdecl xwinrestore(str) winrestore
 10 cdecl xwinactivate(str) winactivate
 11 cdecl xifwinactive(str) ifwinactive
-
+12 cdecl xsend(str str) send
