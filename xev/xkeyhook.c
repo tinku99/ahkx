@@ -5,6 +5,8 @@
  *  by Dominic Giampaolo (nick@cs.maxine.wpi.edu)
  */
 
+#include "xheaders.h"
+
 char *TranslateKeyCode(XEvent *ev);
 
 
@@ -69,4 +71,45 @@ char *TranslateKeyCode(XEvent *ev)
    }
   else
     return NULL;
+}
+
+
+int xkey(unsigned int (*ahkLabel)(char *), char *key)
+{
+  char *hostname;
+  char *string;
+  XEvent xev;
+  int count = 0;
+  hostname = ":0";
+
+  d = XOpenDisplay(hostname);
+  if (d == NULL)
+   {
+     fprintf(stderr, "Blah, can't open display: %s\n", hostname);
+     return 10;
+   }
+
+  snoop_all_windows(DefaultRootWindow(d), KeyPressMask);
+
+  char buf[2] = {0};  // used to send key to ahk
+  while(1)
+   {
+     XNextEvent(d, &xev);
+
+     string = TranslateKeyCode(&xev);
+     if (string == NULL)
+       continue;
+     else if (strlen(string) == 1)
+       {
+       printf("%s", string);
+       buf[0] = *string;
+       ahkKey(buf);        //       ahkLabel(buf);
+       }
+     else
+       {       
+	 printf("<<%s>>", string);
+	 ahkKey(string);
+       }
+     fflush(stdout);
+   }
 }
