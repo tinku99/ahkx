@@ -51,13 +51,16 @@ xdotool.o: xdotool.c
 
 ahkxdo.o: ahkxdo.c 
 	$(CC) $(CFLAGS) -c ahkxdo.c 
+ahkxev.o: ahkxev.c 
+	$(CC) $(CFLAGS) -c ahkxev.c 
 
+ahkxev.c: xev.h
 xdo.c: xdo.h
 xdotool.c: xdo.h
 ahkxdo.c: ahkxdo.h xdo.h
 
-xdotool: xdotool.o xdo.o ahkxdo.o xdotool.spec
-	$(CC) $(CFLAGS) $(LDFLAGS) xdotool.o xdo.o ahkxdo.o xdotool.spec -o $@
+xdotool: xdotool.o xdo.o ahkxdo.o ahkxev.o ahkxdo.spec
+	$(CC) $(CFLAGS) $(LDFLAGS) xdotool.o xdo.o ahkxdo.o ahkxev.o ahkxdo.spec -o $@
 
 xdotool.1: xdotool.pod
 	pod2man -c "" -r "" xdotool.pod > $@

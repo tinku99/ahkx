@@ -37,6 +37,7 @@ int main(int argc, char **argv)
   //  extern ahkLabel, ahkdll;
   //  void * dll_handle = WineLoadLibrary("AutoHotkey.dll" );
   void * dll_handle = WineLoadLibrary("ahkx.so" ); // ahkx.dll
+    printf("%d%s", (int)dll_handle, "ahkxhandle");
   void * xdo_handle = WineLoadLibrary("xdotool.dll.so" ); // ahkx.dll
   char *script; 
   if (argv[1] == NULL)
@@ -53,6 +54,7 @@ int main(int argc, char **argv)
     xwingetid = WineGetProcAddress( xdo_handle, "xwingetid" );
     xsend = WineGetProcAddress( xdo_handle, "xsend" );
     xinit = WineGetProcAddress( xdo_handle, "xinit" );
+    printf("%d%s", (int)ahkdll, "ahkdll");
     printf("%d%s", (int)ximportfunc, "ximportfunc");
     printf("%d%s", (int)xifwinactive, "xifwinactive");
     printf("%d%s", (int)xwingetid, "xwingetid");

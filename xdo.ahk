@@ -10,21 +10,31 @@ q::exitapp
 
 #ifwinexist naveen
 i:: 
-controlsend, , hello, naveen
-msgbox xsend complete
-return
-
-
-k:: 
-msgbox xdo
-DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
-, "int", 0, "int", 20, "int", 1, "cdecl") 
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 0, "int", -20, "int", 1, "cdecl") 
 return
 
 
+k:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", 0, "int", 20, "int", 1, "cdecl") 
+return
 
+j:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", -20, "int", 0, "int", 1, "cdecl") 
+return
+
+
+l:: 
+DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
+, "int", 20, "int", 0, "int", 1, "cdecl") 
+return
+
+n::
+controlsend, , hello, naveen
+msgbox xsend complete
+return
 #ifwinexist
 
 #ifwinactive ^xdo
