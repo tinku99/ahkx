@@ -7,8 +7,16 @@ return
 
 q::exitapp
 
+F4::
+sendevent, a
+return
+
 
 #ifwinexist naveen
+a::
+msgbox test
+return
+
 i:: 
 DllCall(A_ScriptDir . "\xdotool.dll.so\xmousemove"
 , "int", 0, "int", -20, "int", 1, "cdecl") 

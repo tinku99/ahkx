@@ -94,6 +94,8 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
   char buf[2] = {0};  // used to send key to ahk
   while(1)
    {
+     //     sleep(10);
+     //     continue ; 
      XNextEvent(d, &xev);
 
      string = TranslateKeyCode(&xev);

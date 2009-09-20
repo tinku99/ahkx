@@ -112,7 +112,7 @@ int winmove(char *rgxname, int x, int y)
 
 Window wingetid(char *rgxname)
 {
-  printf("in wingetid with %s", rgxname);
+  // printf("in wingetid with %s", rgxname);
   Window wid = 0;
   Window *list;  // window = unsigned long
   int nwindows;
@@ -152,7 +152,7 @@ int ifwinactive(char *rgxname)
 
 
 int send(char *message, char *rgxname) {
-  printf("in xsend");
+  //  printf("in xsend");
   Window window = wingetid(rgxname);
 
 int ret = 0;
@@ -176,7 +176,7 @@ int ret = 0;
 
 
     ret = xdo_type(xdo, window, message, delay);
-    printf("typing %s", message);
+    // printf("typing %s", message);
     if (ret) {
       fprintf(stderr, "xdo_type reported an error\n");
     }
