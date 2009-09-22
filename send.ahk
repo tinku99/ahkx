@@ -2,7 +2,7 @@
 #UseHook 
 ; SendMode Input
 
-#IfWinActive ^naveen
+#IfWinExist ^naveen
 a::
 msgbox test
 return

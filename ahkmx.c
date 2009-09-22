@@ -24,8 +24,9 @@ typedef int (* ahkx_int_str_str)(char *ahkx_str, char *ahkx_str2); // ahkx N11
 
 int (*ahkdll)(char *, char *, char *) ;
 unsigned int (*ahkLabel)(char *) ;
+// unsigned int (*ahkFunction)(char *, char *, char *, char *, char *) ;
 unsigned int (*ahkKey)(char *) ;
-unsigned int (*ahkCollect)(char *) ;
+// unsigned int (*ahkCollect)(char *) ;
 unsigned int (*ximportfunc)(int (*)(char *), int (*)(char *)
 			    ,int (*)(char *, char *)) ;
 ahkx_int_str xifwinactive;  // int (* xifwinactive)(char *ahkx_str);
@@ -47,18 +48,23 @@ int main(int argc, char **argv)
 
     ahkdll = WineGetProcAddress( dll_handle, "ahkdll" );
     ahkLabel = WineGetProcAddress( dll_handle, "ahkLabel" );
+    // ahkFunction = WineGetProcAddress( dll_handle, "ahkFunction" );
     ahkKey = WineGetProcAddress( dll_handle, "ahkKey" );
-    ahkCollect = WineGetProcAddress( dll_handle, "ahkCollect" );
+    // ahkCollect = WineGetProcAddress( dll_handle, "ahkCollect" );
     ximportfunc = WineGetProcAddress( dll_handle, "ximportfunc" );
     xifwinactive = WineGetProcAddress( xdo_handle, "xifwinactive" );
     xwingetid = WineGetProcAddress( xdo_handle, "xwingetid" );
     xsend = WineGetProcAddress( xdo_handle, "xsend" );
     xinit = WineGetProcAddress( xdo_handle, "xinit" );
-    printf("%d%s", (int)ahkdll, "ahkdll");
-    printf("%d%s", (int)ximportfunc, "ximportfunc");
-    printf("%d%s", (int)xifwinactive, "xifwinactive");
-    printf("%d%s", (int)xwingetid, "xwingetid");
-    printf("%d%s", (int)xsend, "xsend");
+    printf("%d%s\n", (int)ahkdll, "ahkdll");
+    printf("%d%s\n", (int)ximportfunc, "ximportfunc");
+    printf("%d%s\n", (int)xifwinactive, "xifwinactive");
+    printf("%d%s\n", (int)xwingetid, "xwingetid");
+    printf("%d%s\n", (int)xsend, "xsend");
+    printf("%d%s\n", (int)ahkLabel, "ahkLabel");
+    //    printf("%d%s\n", (int)ahkFunction, "ahkFunction");
+    printf("%d%s\n", (int)ahkKey, "ahkKey");
+    
     //    xwingetid("naveen");
     //    xsend("from xsend", "naveen");
 
@@ -66,7 +72,7 @@ int main(int argc, char **argv)
     sleep(2);
     xinit();
     int success = ximportfunc(xifwinactive, xwingetid, xsend);
-    printf("%d%s", success, "transferred");
+    printf("%d%s\n", success, "transferred");
     //    ahkLabel("k");
     char *key = "k";  // not used right now
     xkey(ahkLabel, key);
@@ -91,7 +97,7 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
 
   snoop_all_windows(DefaultRootWindow(d), KeyPressMask);
 
-  char buf[2] = {0};  // used to send key to ahk
+  char buf[20] = {0};  // used to send key to ahk
   while(1)
    {
      //     sleep(10);
@@ -99,20 +105,23 @@ int xkey(unsigned int (*ahkLabel)(char *), char *key)
      XNextEvent(d, &xev);
 
      string = TranslateKeyCode(&xev);
-     if (string == NULL)
+
+    if (string == NULL)
        continue;
      else if (strlen(string) == 1)
        {
-       printf("%s", string);
+       printf("%s\n", string);
        buf[0] = *string;
        ahkKey(buf);        //       ahkLabel(buf);
+       //	 ahkFunction("msgbox", buf, "", "", "");
        }
      else
        {       
 	 printf("<<%s>>", string);
-	 ahkKey(string);
+	 ahkLabel(string); 
        }
      fflush(stdout);
-   }
+    
+}
 }
 

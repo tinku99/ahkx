@@ -13,10 +13,11 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-dependencies: xdotool, wine-dev, libx11-dev. 
+dependencies: xdotool, wine-dev, libx11-dev, libxt-dev
 also see debian/control
 
 
 ./build
 ./run scriptname
+
 
